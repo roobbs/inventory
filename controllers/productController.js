@@ -1,9 +1,14 @@
-const Product = require("../models/category");
+const Product = require("../models/product");
 const asyncHandler = require("express-async-handler");
 
 //display list of all products
 exports.product_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
+  const products = await Product.find({}).populate("category").exec();
+
+  res.render("product_list", {
+    title: "Products",
+    products: products,
+  });
 });
 
 //display detail page for a specific product

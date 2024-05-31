@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .contentTitle !{title}
+  .createDeleteButtons 
+    a.seeProdBtn(href="/catalog/product/create") Add a product here
+
+  if products && products.length
+    .products 
+      each product in products 
+        a.productContainer(href=product.url)
+          .productName #{product.name}
+          .productDesc #{product.description}
+          div.container
+            .productCategory #{product.category.name}
+            .productPrice $#{product.price}
+  else
+    div No hay ningun product, agrega uno!

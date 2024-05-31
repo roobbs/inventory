@@ -4,6 +4,8 @@ html
     title= title
     meta(charset= "utf-8")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/categoryStyle.css')
+    link(rel='stylesheet', href='/stylesheets/productStyle.css')
   body
     header.header 
       .headerTitle Inventory App
@@ -11,6 +13,8 @@ html
         li 
           a(href="/catalog") Home
         li 
-          a(href="catalog/products") All products
+          a(href="/catalog/categories") Categories
+        li 
+          a(href="/catalog/products") Products
     div.content
       block content
