@@ -2,6 +2,15 @@ doctype html
 html
   head
     title= title
+    meta(charset= "utf-8")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header.header 
+      .headerTitle Inventory App
+      ul 
+        li 
+          a(href="/catalog") Home
+        li 
+          a(href="catalog/products") All products
+    div.content
+      block content

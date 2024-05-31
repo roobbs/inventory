@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .contentTitle !{title}
+  div Total categories: #{categories.length}
+  if categories && categories.length
+    .categories 
+      each category in categories 
+        a.categoryContainer(href=category.url)
+          .categoryName #{category.name}
+          .categoryDesc #{category.description}
+    a.seeProdBtn(href="catalog/products") See products
+  else
+    div No hay ninguna categoria, agrega una!
+    a.seeProdBtn(href="catalog/category/create") Add a category here
+

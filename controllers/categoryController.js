@@ -2,7 +2,15 @@ const Category = require("../models/category");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: HOME");
+  const categories = await Category.find({}).sort({ name: 1 }).exec();
+
+  res.render("index", {
+    title:
+      categories.length > 0
+        ? "Welcome, search on your categories"
+        : "Welcome, Create your own categories",
+    categories: categories,
+  });
 });
 
 //display list of all Categories
