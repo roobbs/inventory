@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .contentTitle !{title}
+  .productInfo
+    .productDescTitle #{product.description}
+    .productPriceContainer 
+      .productPrice $#{product.price}
+      div Category: 
+        a.seeProdBtn(href=product.category.url) #{product.category.name}
+  .createDeleteButtons 
+    a.seeProdBtn(href=product.url+"/update") Edit product
+    a.seeProdBtn(href=product.url+"/delete") Delete product
+  

@@ -13,7 +13,20 @@ exports.product_list = asyncHandler(async (req, res, next) => {
 
 //display detail page for a specific product
 exports.product_detail = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
+  const product = await Product.findById(req.params.id)
+    .populate("category")
+    .exec();
+
+  if (product === null) {
+    const err = new Error("Product not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("product_detail", {
+    title: product.name,
+    product: product,
+  });
 });
 
 //display product create form on GET

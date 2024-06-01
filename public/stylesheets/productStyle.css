@@ -45,3 +45,29 @@
   background-color: blue;
   color: white;
 }
+
+/**/
+
+.productInfo {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  /* justify-content: center; */
+  align-items: center;
+}
+.productDescTitle {
+  font-size: 1rem;
+}
+.productPriceContainer {
+  justify-self: center;
+}
+.productPriceContainer div:has(a),
+.productPriceContainer div > a {
+  font-size: 1.5rem;
+}
+.productPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 2rem 0rem;
+  text-align: center;
+}
