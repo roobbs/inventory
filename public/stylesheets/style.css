@@ -88,3 +88,7 @@ a {
   background-color: blue;
   color: white;
 }
+.createDeleteButtons {
+  display: flex;
+  gap: 1rem;
+}

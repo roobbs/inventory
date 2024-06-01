@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .contentTitle !{title}
+  .categoryDescTitle #{category.description}
+  .createDeleteButtons 
+    a.seeProdBtn(href=category.url+"/update") Edit category
+    a.seeProdBtn(href=category.url+"/delete") Delete category
+  div #{title}'s Products:
+  if products && products.length
+    .products 
+      each product in products 
+        a.productContainer(href=product.url)
+          .productName #{product.name}
+          .productDesc #{product.description}
+          div.container
+            .productPrice $#{product.price}
+  else
+    div No hay ninguna producto, agrega uno!

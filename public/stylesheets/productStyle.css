@@ -8,7 +8,6 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 .productContainer {
-  /* width: max-content; */
   background-color: #26008d;
   padding: 1rem;
   border-radius: 10px;
