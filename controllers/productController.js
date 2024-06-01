@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const Category = require("../models/category");
 const asyncHandler = require("express-async-handler");
 
 //display list of all products
@@ -31,7 +32,11 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
 
 //display product create form on GET
 exports.product_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
+  const categories = await Category.find({}).exec();
+  res.render("product_form", {
+    title: "Create new product",
+    categories: categories,
+  });
 });
 
 //display product create form on POST

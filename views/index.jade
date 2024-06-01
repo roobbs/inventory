@@ -9,8 +9,10 @@ block content
         a.categoryContainer(href=category.url)
           .categoryName #{category.name}
           .categoryDesc #{category.description}
-    a.seeProdBtn(href="/catalog/products") See products
+    a.seeProdBtn(href="/catalog/category/create") Add a category here
+    a.seeProdBtn(href="/catalog/product/create") Add a product here
   else
     div No hay ninguna categoria, agrega una!
     a.seeProdBtn(href="/catalog/category/create") Add a category here
+    a.seeProdBtn(href="/catalog/product/create") Add a product here
 
