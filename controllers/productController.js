@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const Category = require("../models/category");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 //display list of all products
 exports.product_list = asyncHandler(async (req, res, next) => {
