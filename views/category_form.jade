@@ -10,7 +10,7 @@ block content
       input#name.form-control(type='text', placeholder='Name' name='name' required value=(undefined===category ? '' : category.name) )
     div.form-group
       label(for='description') Description:
-      textarea#description.form-control(type='text', placeholder='Description of your category' name='description' required value=(undefined===category ? '' : category.description) )
+      textarea#description.form-control( placeholder='Description of your category' name='description' required ) #{value=(undefined===category ? '' : category.description) }
     button.btn.btn-primary(type='submit') Submit
 
   if errors

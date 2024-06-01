@@ -179,8 +179,12 @@ exports.product_update_post = [
       });
       return;
     } else {
-      await product.save();
-      res.redirect(product.url);
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.id,
+        product,
+        {}
+      );
+      res.redirect(updatedProduct.url);
     }
   }),
 ];
