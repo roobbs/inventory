@@ -109,10 +109,78 @@ exports.product_delete_post = asyncHandler(async (req, res, next) => {
 
 //display product update form on GET
 exports.product_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
+  const product = await Product.findById(req.params.id)
+    .populate("category")
+    .exec();
+
+  if (product === null) {
+    const err = new Error("Product not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  const categories = await Category.find({}).exec();
+
+  res.render("product_form", {
+    title: "Update product",
+    product: product,
+    categories: categories,
+  });
 });
 
 //display product update form on POST
-exports.product_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
-});
+exports.product_update_post = [
+  body("name", "Category name must contain at least 3 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+  body("description", "Description must hace at least 10 characteres")
+    .trim()
+    .isLength({ min: 10 })
+    .escape(),
+  body("category", "You must select a category")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Price must not be empty")
+    .toFloat({ gt: 1 })
+    .withMessage("Price must be greater than 1")
+    .escape(),
+  body("stock")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Stock must not be empty")
+    .toFloat({ gt: 1 })
+    .withMessage("Stock must be greater than 1")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const product = new Product({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      stock: req.body.stock,
+    });
+
+    if (!errors.isEmpty()) {
+      const categories = await Category.find({}).exec();
+
+      res.render("product_form", {
+        title: "Create new product",
+        product: product,
+        categories: categories,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      await product.save();
+      res.redirect(product.url);
+    }
+  }),
+];
