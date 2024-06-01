@@ -41,9 +41,61 @@ exports.product_create_get = asyncHandler(async (req, res, next) => {
 });
 
 //display product create form on POST
-exports.product_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED");
-});
+exports.product_create_post = [
+  body("name", "Category name must contain at least 3 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+  body("description", "Description must hace at least 10 characteres")
+    .trim()
+    .isLength({ min: 10 })
+    .escape(),
+  body("category", "You must select a category")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Price must not be empty")
+    .toFloat({ gt: 1 })
+    .withMessage("Price must be greater than 1")
+    .escape(),
+  body("stock")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Stock must not be empty")
+    .toFloat({ gt: 1 })
+    .withMessage("Stock must be greater than 1")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const product = new Product({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      stock: req.body.stock,
+    });
+
+    if (!errors.isEmpty()) {
+      const categories = await Category.find({}).exec();
+
+      res.render("product_form", {
+        title: "Create new product",
+        product: product,
+        categories: categories,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      await product.save();
+      res.redirect(product.url);
+    }
+  }),
+];
 
 //display product delete form on GET
 exports.product_delete_get = asyncHandler(async (req, res, next) => {

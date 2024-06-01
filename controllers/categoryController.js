@@ -55,7 +55,7 @@ exports.category_create_post = [
     .trim()
     .isLength({ min: 3 })
     .escape(),
-  body("description", "Description must hace at lesat 10 characteres")
+  body("description", "Description must hace at least 10 characteres")
     .trim()
     .isLength({ min: 10 })
     .escape(),

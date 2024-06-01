@@ -10,7 +10,7 @@ block content
       input#name.form-control(type='text', placeholder='Name' name='name' required value=(undefined===product ? '' : product.name) )
     div.form-group
       label(for='description') Description:
-      textarea#description.form-control(type='text', placeholder='Description of your product' name='description' required value=(undefined===product ? '' : product.description) )
+      textarea#description.form-control(type='text', placeholder='Description of your product' name='description' required ) #{undefined===product ? '' : product.description}
     div.form-group
       label(for='category') Category:
       select#category.form-control(name="category" required)
