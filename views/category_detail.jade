@@ -5,7 +5,8 @@ block content
   .categoryDescTitle #{category.description}
   .createDeleteButtons 
     a.seeProdBtn(href=category.url+"/update") Edit category
-    a.seeProdBtn(href=category.url+"/delete") Delete category
+    block delete
+      a.seeProdBtn(href=category.url+"/delete") Delete category
   div #{title}'s Products:
   if products && products.length
     .products 
@@ -16,4 +17,4 @@ block content
           div.container
             .productPrice $#{product.price}
   else
-    div No hay ninguna producto, agrega uno!
+    div No hay ningun producto, agrega uno!

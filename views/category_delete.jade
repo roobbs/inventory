@@ -1,0 +1,15 @@
+extends category_detail
+
+block delete  
+  div
+    if products && products.length
+      .deleteTitle(style="font-weight:700;font-size:1rem;") You must delete category's products first!
+    else 
+      form(method="POST" style="border-color: transparent; padding:0;")
+        .deleteTitle(style="font-weight:700;font-size:1rem;") Are you sure you want to delete this category?
+        .form-group   
+          input#categoryid(type="hidden", name="categoryid" value=category._id)
+        
+        button(type="submit") YES
+        a.seeProdBtn(href=category.url style="align-self:center;") Go back
+
