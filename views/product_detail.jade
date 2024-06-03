@@ -10,5 +10,6 @@ block content
         a.seeProdBtn(href=product.category.url) #{product.category.name}
   .createDeleteButtons 
     a.seeProdBtn(href=product.url+"/update") Edit product
-    a.seeProdBtn(href=product.url+"/delete") Delete product
+    block delete
+      a.seeProdBtn(href=product.url+"/delete") Delete product
   
